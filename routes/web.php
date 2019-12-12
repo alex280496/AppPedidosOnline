@@ -18,3 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin/products','ProductController@index'); //para el listado de productos
+Route::get('/admin/products/create','ProductController@create'); //para ver el formulario
+Route::post('/admin/products','ProductController@store'); //para registrar datos del formulario
