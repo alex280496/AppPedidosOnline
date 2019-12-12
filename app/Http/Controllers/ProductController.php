@@ -30,4 +30,32 @@ class ProductController extends Controller
         return redirect('/admin/products');
 
     }
+
+    public function edit($id)
+    {
+        //return "mostrar el formulario con id $id ";
+        $product=Product::find($id);
+        return view('admin.products.edit')->with(compact('product'));
+    }
+
+    public function update(Request $request, $id){
+
+        $product=Product::find($id);
+        $product->name=$request->input('name');
+        $product->description=$request->input('description');
+        $product->price=$request->input('price');
+        $product->long_description=$request->input('long_description');
+        $product->save(); // hace un update de un producto qeu ay existia
+
+        return redirect('/admin/products');
+
+         
+    }
+    public function destroy($id)
+    {
+        $product=Product::find($id);
+        $product->delete();  //elimina el producto seleccionado
+
+        return back();  //regresa a la vista anteriror
+    }
 }

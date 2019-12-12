@@ -4,9 +4,8 @@
 <div class="page-header header-filter" data-parallax="true" style="background-image: url('{{ ('/img/profile_city.jpg') }}')">
   </div>
   <div class="main main-raised">
-    <div class="container">
+    <div class="container-fluid">
 
-      
       <div class="text-center">
         <h2 class="title">Listado de Productos</h2>
         <div class="team">
@@ -20,7 +19,7 @@
                         <th class="text-center">#</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
-                        <th>Categoria</th>
+                        <th >Categoria</th>
                         <th class="text-right">Precio</th>
                         <th class="text-right">Opciones</th>
                     </tr>
@@ -34,15 +33,26 @@
                         <td>{{$product->category ? $product->category->name : 'General'}}</td>
                         <td class="text-right">&euro; {{$product->price}}</td>
                         <td class="td-actions text-right">
-                            <button type="button" rel="tooltip" title="Ver Producto" class="btn btn-info btn-simple btn-xs">
+                            
+
+                            <form method="post" action="{{ url( '/admin/products/'.$product->id) }}">
+                              {{ csrf_field() }}
+                              {{ method_field('DELETE')}} 
+                              <a rel="tooltip" title="Ver Producto" class="btn btn-info btn-simple btn-xs">
                                 <i class="fa fa-info"></i>
-                            </button>
-                            <button type="button" rel="tooltip" title="Editar Producto" class="btn btn-success btn-simple btn-xs">
-                                <i class="fa fa-edit"></i>
-                            </button>
-                            <button type="button" rel="tooltip" title="Eliminar Producto" class="btn btn-danger btn-simple btn-xs">
+                              </a>
+                              <a  href="{{ url('/admin/products/'.$product->id.'/edit') }}" rel="tooltip" title="Editar Producto" class="btn btn-success btn-simple btn-xs">
+                                  <i class="fa fa-edit"></i>
+                              </a>
+
+                              <button   rel="tooltip" title="Eliminar Producto" class="btn btn-danger btn-simple btn-xs">
                                 <i class="fa fa-times"></i>
                             </button>
+                              
+                            </form>
+
+
+                            
                         </td>
                     </tr>
                     @endforeach
